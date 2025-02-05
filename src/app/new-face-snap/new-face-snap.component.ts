@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Observable, map } from 'rxjs';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Observable, map, tap } from 'rxjs';
 import { FaceSnap } from '../models/face-snap';
 import { CommonModule, DatePipe, UpperCasePipe } from '@angular/common';
+import { FaceSnapsService } from '../services/face-snaps-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-face-snap',
@@ -19,14 +21,16 @@ export class NewFaceSnapComponent implements OnInit{
 
   snapForms!: FormGroup
   faceSnapPreview$!: Observable<FaceSnap>
-  constructor(private formBuilder: FormBuilder){}
+  urlRegex!: RegExp
+  constructor(private formBuilder: FormBuilder, private faceSnapService: FaceSnapsService, private router: Router){}
   ngOnInit(): void {
+    this.urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/;
     this.snapForms = this.formBuilder.group({
-      title: [null],
-      description: [null],
-      imgUrl:[null],
+      title: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+      imgUrl: [null, [Validators.required, Validators.pattern(this.urlRegex)]],
       location: [null]
-    })
+  });
 
     this.faceSnapPreview$ = this.snapForms.valueChanges.pipe(
       map(formValue => ({
@@ -38,7 +42,10 @@ export class NewFaceSnapComponent implements OnInit{
     )
   }
   onSubmitForm():void{
-    console.log(this.snapForms.value)
+    this.faceSnapService.addFaceSnaps(this.snapForms.value).pipe(
+      tap(() => this.router.navigateByUrl('/facesnaps'))
+    ).subscribe()
+
   }
 
 }

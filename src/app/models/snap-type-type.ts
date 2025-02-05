@@ -1,1 +1,1 @@
-export type SnapeType = 'snap' | 'unSnap'
+export type SnapeType = 'snap' | 'unsnap'

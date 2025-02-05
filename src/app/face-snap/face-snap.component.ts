@@ -7,15 +7,15 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-face-snap',
   imports: [
-    NgStyle,
-    NgClass,
+    // NgStyle,
+    // NgClass,
     // UpperCasePipe,
     // LowerCasePipe,
     // DecimalPipe,
     // PercentPipe,
     // CurrencyPipe
     TitleCasePipe,
-    DatePipe,
+    // DatePipe,
   ],
   templateUrl: './face-snap.component.html',
   styleUrl: './face-snap.component.scss'
