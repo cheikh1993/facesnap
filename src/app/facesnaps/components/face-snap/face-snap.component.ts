@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FaceSnap } from '../models/face-snap';
+import { FaceSnap } from '../../../core/models/face-snap';
 import { CurrencyPipe, DatePipe, DecimalPipe, LowerCasePipe, NgClass, NgStyle, PercentPipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { FaceSnapsService } from '../services/face-snaps-service';
+import { FaceSnapsService } from '../../../core/services/face-snaps-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
     // PercentPipe,
     // CurrencyPipe
     TitleCasePipe,
+    
     // DatePipe,
   ],
   templateUrl: './face-snap.component.html',
@@ -31,7 +32,7 @@ export class FaceSnapComponent {
 
 
   onView() {
-    this.router.navigateByUrl(`facesnaps/${this.faceSnap.id}`)
+    this.router.navigateByUrl(`/facesnaps/${this.faceSnap.id}`)
   }
 
 

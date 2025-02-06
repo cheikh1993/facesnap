@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FaceSnapComponent } from './face-snap/face-snap.component';
-import { FaceSnap } from './models/face-snap';
-import { FaceSnapListComponent } from './face-snap-list/face-snap-list.component';
-import { HeaderComponent } from "./header/header.component";
+import { FaceSnapComponent } from './facesnaps/components/face-snap/face-snap.component';
+import { FaceSnap } from './core/models/face-snap';
+import { FaceSnapListComponent } from './facesnaps/components/face-snap-list/face-snap-list.component';
+import { HeaderComponent } from "./core/components/header/header.component";
 import { RouterOutlet } from '@angular/router';
 import { Observable, filter, interval, map, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { CoreModule } from './core/core.module';
 
 
 @Component({
   selector: 'app-root',
   imports: [
-    HeaderComponent,
-    RouterOutlet,
+   CoreModule,
     RouterOutlet,
     CommonModule,
     ],

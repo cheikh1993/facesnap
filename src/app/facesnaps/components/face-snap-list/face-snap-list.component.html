@@ -1,0 +1,9 @@
+<ng-container *ngIf="faceSnaps$ | async as faceSnaps">
+    <ng-container *ngFor="let item of faceSnaps; trackBy: trackByFn">
+      <app-face-snap [faceSnap]="item"></app-face-snap>
+    </ng-container>
+  </ng-container>
+  
+  <!-- router-outlet doit être en dehors de *ngFor -->
+  <router-outlet></router-outlet>
+  
